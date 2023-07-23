@@ -1,8 +1,8 @@
 import {
   __,
-  allPass, anyPass, complement,
+  allPass, any, anyPass, complement,
   compose,
-  countBy,
+  countBy, dissoc,
   equals, gte,
   identity,
   lte,
@@ -69,7 +69,6 @@ const countColors = compose(countBy(identity), values);
 const isAllColorsTheSame = (color) => compose(propEq(color, 4), countColors);
 const isTriangleAndSquareSameColor = ({ square, triangle }) => equals(square, triangle);
 const isBlueAndRedEquals = ({ blue, red }) => equals(blue, red);
-const lessThanThree = ({ white }) => lte(white, 1);
 
 // 1. Красная звезда, зеленый квадрат, все остальные белые.
 export const validateFieldN1 = allPass([ isRedStar, isGreenSquare, isWhiteTriangle, isWhiteCircle ]);
@@ -84,14 +83,12 @@ export const validateFieldN3 = allPass([ compose(isBlueAndRedEquals, countColors
 export const validateFieldN4 = allPass([ isBlueCircle, isRedStar, isOrangeSquare ]);
 
 // 5. Три фигуры одного любого цвета кроме белого (четыре фигуры одного цвета – это тоже true).
-export const validateFieldN5 = anyPass(
-  [
-    compose(lessThanThree, countColors),
-    isAllColorsTheSame('green'),
-    isAllColorsTheSame('red'),
-    isAllColorsTheSame('blue'),
-    isAllColorsTheSame('orange')
-  ]);
+export const validateFieldN5 = anyPass([
+  compose(gte(__, 3), prop('green'), countColors),
+  compose(gte(__, 3), prop('red'), countColors),
+  compose(gte(__, 3), prop('blue'), countColors),
+  compose(gte(__, 3), prop('orange'), countColors),
+]);
 
 // 6. Ровно две зеленые фигуры (одна из зелёных – это треугольник), плюс одна красная. Четвёртая оставшаяся любого
 // доступного цвета, но не нарушающая первые два условия
