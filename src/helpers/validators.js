@@ -1,8 +1,9 @@
 import {
+  __,
   allPass, anyPass, complement,
   compose,
   countBy,
-  equals,
+  equals, gte,
   identity,
   lte,
   prop,
@@ -74,7 +75,7 @@ const lessThanThree = ({ white }) => lte(white, 1);
 export const validateFieldN1 = allPass([ isRedStar, isGreenSquare, isWhiteTriangle, isWhiteCircle ]);
 
 // 2. Как минимум две фигуры зеленые.
-export const validateFieldN2 = allPass([ compose(propEq('green', 2), countColors) ]);
+export const validateFieldN2 = allPass([ compose(gte(__, 2), prop('green'), countColors) ]);
 
 // 3. Количество красных фигур равно кол-ву синих.
 export const validateFieldN3 = allPass([ compose(isBlueAndRedEquals, countColors) ]);
