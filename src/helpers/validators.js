@@ -1,17 +1,13 @@
 import {
-  all,
   allPass, anyPass, complement,
   compose,
-  count,
-  countBy, eqProps,
+  countBy,
   equals,
-  gte,
   identity,
-  lensProp, lt, lte, not,
+  lte,
   prop,
   propEq,
   values,
-  view
 } from "ramda";
 
 const R = require('ramda');
