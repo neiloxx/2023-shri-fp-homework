@@ -1,18 +1,3 @@
-import {
-  __,
-  allPass, any, anyPass, complement,
-  compose,
-  countBy, dissoc,
-  equals, gte,
-  identity,
-  lte,
-  prop,
-  propEq,
-  values,
-} from "ramda";
-
-const R = require('ramda');
-
 /**
  * @file Домашка по FP ч. 1
  *
@@ -27,9 +12,20 @@ const R = require('ramda');
  *
  * Если какие либо функции написаны руками (без использования библиотек) это не является ошибкой
  */
-
+import {
+  __,
+  allPass,anyPass, complement,
+  compose,
+  countBy,
+  equals, gte,
+  identity,
+  prop,
+  propEq,
+  values,
+} from "ramda";
 
 const getSquare = prop('square');
+
 const getStar = prop('star');
 const getTriangle = prop('triangle');
 const getCircle = prop('circle');
